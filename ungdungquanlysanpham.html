@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Management</title>
+    <style>
+        .button {
+            background: green;
+            color: white;
+            width: 80px;
+        }
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<h3>Add New Product</h3>
+<input type="text" id="newproduct">
+<input type="button" onclick="addProduct();" value="Add" class="button"> <br> <br>
+<input type="button" onclick="disPlay();" value="Display">
+<button type="reset"  onclick="resetDisPlay();">Reset</button>
+<p>Display All Product</p>
+<br>
+<p id="result"></p>
+
+<script>
+    let product = ['Sony', 'Samsung', 'Nokia', 'Xiaomi', 'Apple', 'Vsmart', 'Vertu', 'Oppo'];
+
+    //hien thi san pham
+    function disPlay() {
+        let table = '<table class="table">';
+        for (let i of product) {
+            let newtab = "<tr>"
+                + "<td>" + i + "</td>"
+                + "<td>"
+                + "<button class='button'" + " onclick='changeProduct(" + product.indexOf(i) + ");'>Edit</button>"
+                + "</td>"
+                + "<td>"
+                + "<button class='button'" + " onclick='delProduct(" + product.indexOf(i) + ");'>Delete</button>"
+                + "</td>"
+                + "</tr>";
+            table += newtab;
+        }
+        table += "</table>";
+        document.getElementById('result').innerHTML = table;
+    }
+    //reset display
+    function resetDisPlay(){
+        product = ['Sony', 'Samsung', 'Nokia', 'Xiaomi', 'Apple', 'Vsmart', 'Vertu', 'Oppo'];
+        disPlay();
+    }
+
+    //them san pham
+    function addProduct() {
+        let newproduct = document.getElementById('newproduct').value;
+        product.push(newproduct);
+        disPlay();
+    }
+
+    //sua san pham
+    function changeProduct(index) {
+        product[index] = prompt("Input new name product");
+        disPlay();
+    }
+
+
+    // xoa san pham
+    function delProduct(index) {
+        product.splice(index, 1);
+        disPlay();
+    }
+
+</script>
+</body>
+</html>
